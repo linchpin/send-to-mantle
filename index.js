@@ -31,7 +31,7 @@ const sendData = ( data ) => {
 
     // SHA 256 (typically you'd want to use this one for validation)
     const sha256_hmac   = crypto.createHmac( 'sha256', core.getInput( 'mantle-secret' ) );
-    const sha256_data   = sha256_hmac.update(data);
+          sha256_hmac.update(data);
     const sha256_string = 'sha256=' + sha256_hmac.digest('hex');
 
     axios.post(
