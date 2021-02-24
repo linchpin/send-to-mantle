@@ -22,7 +22,7 @@ let json = {};
  */
 const sendData = ( data ) => {
 
-    const mantleURI = core.getInput('mantle-install');
+    const mantleURI = core.getInput('mantle-uri');
 
     if ( ! mantleURI ) {
         core.setFailed( 'No Mantle URI Passed' );
