@@ -34,14 +34,12 @@ const sendData = ( data ) => {
     // SHA 1
     const sha1_hmac     = crypto.createHmac( 'sha1', core.getInput( 'mantle-secret' ) );
           sha1_hmac.update(data);
-    const sha1_data     = sha1_hmac.data();
-    const sha1_string   = 'sha1=' + sha1_data.toString('hex');
+    const sha1_string   = 'sha1=' + sha1_hmac.digest('hex');
 
     // SHA 256 (typically you'd want to use this one for validation)
     const sha256_hmac   = crypto.createHmac( 'sha256', core.getInput( 'mantle-secret' ) );
-          sha256_hmac.update(data);
     const sha256_data   = sha256_hmac.data();
-    const sha256_string = 'sha256=' + sha256_data.toString('hex');
+    const sha256_string = 'sha256=' + sha256_hmac.digest('hex');
 
     axios.post(
         mantleURI,
