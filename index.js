@@ -46,10 +46,10 @@ const sendData = ( data ) => {
                 "X-Hub-Signature-256": sha256_string
             }
         })
-        .then( function( response ) ) {
+        .then( function( response ) {
             // If everything posted properly send back our deployment's Post ID
             return response.data.post_id;
-        }
+        } )
         .catch(function (error) {
             core.setFailed(error);
         });
