@@ -61,15 +61,7 @@ const sendData = ( data ) => {
  */
 function run() {
     try {
-
-        const data = {
-            'release-version'   : core.getInput('release-version'),
-            'release-changelog' : core.getInput('release-changelog'),
-            'release-committer' : core.getInput('release-committer')
-        }
-
-        return sendData( data );
-
+        return sendData( core.getInput('mantle-payload') );
     } catch (error) {
         core.setFailed(error.message);
     }

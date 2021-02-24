@@ -7,15 +7,9 @@ inputs:
   mantle-secret:
     description: 'The secret key that was generated for you during Mantle setup on your WordPress site'
     required: true
-  release-version:
-    description: 'The version we are deploying in standard SemVer format Example: v1.2.3'
-    required: false
-  release-changelog:
-    description: 'The changelog in MarkDown format for the current release version'
-    required: false
-  release-committer :
-    description: 'The commiter for the latest release'
-    required: false
+  mantle-payload:
+    description: 'A JSON String of data to pass to mantle'
+    required: true
 outputs:
   response: # id of output
     description: 'The response from Mantle when a POST/PUT/GET is made'
