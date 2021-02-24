@@ -1,0 +1,24 @@
+name: 'Send To Mantle'
+description: "GitHub Action use in conjunction with Linchpin's WordPress Client Support Plugin called Mantle"
+inputs:
+  mantle-uri:
+    description: 'The url of the WordPress site where mantle is installed'
+    required: true
+  mantle-secret:
+    description: 'The secret key that was generated for you during Mantle setup on your WordPress site'
+    required: true
+  release-version:
+    description: 'The version we are deploying in standard SemVer format Example: v1.2.3'
+    required: false
+  release-changelog:
+    description: 'The changelog in MarkDown format for the current release version'
+    required: false
+  release-committer :
+    description: 'The commiter for the latest release'
+    required: false
+outputs:
+  response: # id of output
+    description: 'The response from Mantle when a POST/PUT/GET is made'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
