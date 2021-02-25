@@ -22,7 +22,8 @@ const sendData = ( data ) => {
         return;
     }
 
-    console.log( data );
+    // replace new lines with a br tag
+    data = data.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
     // Create our headers send both SHA1 (legacy) and SHA256
 
