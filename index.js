@@ -48,16 +48,11 @@ const sendData = ( data ) => {
             }
         })
         .then( function( response ) {
-
-            console.log(response);
-
             // If everything posted properly send back our deployment's Post ID
-            return response.data.post_id;
+            core.setOutput( 'data', JSON.stringify( response.data ) )
+            return ;
         } )
         .catch(function (error) {
-
-            console.log(error);
-
             core.setFailed(error);
         });
 }
