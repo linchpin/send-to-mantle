@@ -29,6 +29,8 @@ const sendData = ( data ) => {
         return;
     }
 
+    console.log( data );
+
     // Create our headers send both SHA1 (legacy) and SHA256
 
     // SHA 1
@@ -72,7 +74,11 @@ const sendData = ( data ) => {
  */
 function run() {
     try {
-        return sendData( core.getInput('mantle-payload') );
+
+        let data = core.getInput('mantle-payload');
+            data = data.toString();
+
+        return sendData( data );
     } catch (error) {
         console.log(error);
         core.setFailed(error.message);
