@@ -52,10 +52,16 @@ const sendData = ( data ) => {
             }
         })
         .then( function( response ) {
+
+            console.log(response);
+
             // If everything posted properly send back our deployment's Post ID
             return response.data.post_id;
         } )
         .catch(function (error) {
+
+            console.log(error);
+
             core.setFailed(error);
         });
 }
@@ -68,6 +74,7 @@ function run() {
     try {
         return sendData( core.getInput('mantle-payload') );
     } catch (error) {
+        console.log(error);
         core.setFailed(error.message);
     }
 }
