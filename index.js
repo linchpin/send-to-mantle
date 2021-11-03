@@ -16,8 +16,11 @@ let json = {};
 const sendData = ( data ) => {
 
     const mantleURI = core.getInput('mantle-uri');
-    const softFail  = core.getInput('soft-fail'); // Allow for soft fail of message sending
+    let softFail    = core.getInput('soft-fail'); // Allow for soft fail of message sending
 
+    if ( typeof( softFail ) === 'undefined' || '' === softFail ) {
+        softFail = true;
+    }
 
     if ( ! mantleURI ) {
         core.setFailed( 'No Mantle URI Passed' );
@@ -52,16 +55,15 @@ const sendData = ( data ) => {
         .then( function( response ) {
             // If everything posted properly send back our deployment's Post ID
             core.setOutput( 'data', JSON.stringify( response.data ) )
-            return ;
+            return;
         } )
         .catch( function (error) {
-
-            if ( softFail ) {
-                core.setOutput( 'data', JSON.stringify( 'false' ) )
-                return
+            if ( false === softFail ) {
+                core.setFailed(error);
+                return;
             }
 
-            core.setFailed(error);
+            core.setOutput( 'data', JSON.stringify( 'false' ) )
         });
 }
 
@@ -71,7 +73,11 @@ const sendData = ( data ) => {
  */
 function run() {
 
-    const softFail  = core.getInput('soft-fail'); // Allow for soft fail of message sending
+    let softFail  = core.getInput('soft-fail'); // Allow for soft fail of message sending
+
+    if ( typeof( softFail ) === 'undefined' || '' === softFail ) {
+        softFail = true;
+    }
 
     try {
 
@@ -80,12 +86,13 @@ function run() {
 
         return sendData( data );
     } catch (error) {
-        if ( softFail ) {
-            core.setOutput( 'data', JSON.stringify( 'false' ) )
-            return
+        if ( false === softFail ) {
+            core.setFailed( error.message );
+            return;
         }
 
-        core.setFailed( error.message );
+        core.setOutput( 'data', JSON.stringify( 'false' ) )
+
     }
 }
 
