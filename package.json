@@ -34,6 +34,17 @@
   "devDependencies": {
     "@vercel/ncc": "0.31.1",
     "eslint": "8.1.0",
-    "jest": "27.3.1"
-  }
+    "jest": "27.3.1",
+    "browserslist": "4.17.6"
+  },
+  "resolutions": {
+    "ansi-regex": "5.0.1",
+    "tmpl": "1.0.5",
+    "path-parse": "1.0.7"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ]
 }
