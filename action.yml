@@ -10,6 +10,9 @@ inputs:
   mantle-payload:
     description: 'A JSON String of data to pass to mantle'
     required: true
+  soft-fail:
+    description: 'Allow for message sending to fail gracefully'
+    required: false
 outputs:
   response: # id of output
     description: 'The response from Mantle when a POST/PUT/GET is made'

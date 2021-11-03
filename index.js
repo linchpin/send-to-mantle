@@ -16,6 +16,8 @@ let json = {};
 const sendData = ( data ) => {
 
     const mantleURI = core.getInput('mantle-uri');
+    const softFail  = core.getInput('soft-fail'); // Allow for soft fail of message sending
+
 
     if ( ! mantleURI ) {
         core.setFailed( 'No Mantle URI Passed' );
@@ -52,7 +54,13 @@ const sendData = ( data ) => {
             core.setOutput( 'data', JSON.stringify( response.data ) )
             return ;
         } )
-        .catch(function (error) {
+        .catch( function (error) {
+
+            if ( softFail ) {
+                core.setOutput( 'data', JSON.stringify( 'false' ) )
+                return
+            }
+
             core.setFailed(error);
         });
 }
@@ -62,6 +70,9 @@ const sendData = ( data ) => {
  * @return {Promise<void>}
  */
 function run() {
+
+    const softFail  = core.getInput('soft-fail'); // Allow for soft fail of message sending
+
     try {
 
         let data = core.getInput('mantle-payload');
@@ -69,8 +80,12 @@ function run() {
 
         return sendData( data );
     } catch (error) {
-        console.log(error);
-        core.setFailed(error.message);
+        if ( softFail ) {
+            core.setOutput( 'data', JSON.stringify( 'false' ) )
+            return
+        }
+
+        core.setFailed( error.message );
     }
 }
 
