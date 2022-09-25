@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/linchpin/sent-to-mantle#readme",
   "dependencies": {
-    "@actions/core": "1.6.0",
+    "@actions/core": "1.9.1",
     "axios": "0.24.0",
     "loglevel": "1.7.1"
   },
